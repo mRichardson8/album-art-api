@@ -43,6 +43,17 @@ class Album {
             }
         });
     }
+
+    static deleteAlbum(data){
+        return new Promise(async (resolve, reject) => {
+            try{
+                const result = await db.query('DELETE FROM art WHERE id = $1', [data.id])
+                resolve(result)
+            }catch(err){
+                reject(err)
+            }
+        });
+    }
 }
 
 module.exports = Album

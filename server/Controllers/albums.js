@@ -22,9 +22,18 @@ router.get('/search', async (req,res) => {
 
 router.post('/create', async (req,res) => {
     try{
-        console.log(req.body)
         let albumData = req.body.newAlbum
         let result = await Album.createAlbum(albumData)
+        res.status(204).send()
+    }catch(err){
+        res.status(500).json({err})
+    }
+})
+
+router.delete('/', async (req,res) => {
+    try{
+        let albumToDelete = req.body.album
+        let result = await Album.deleteAlbum(albumToDelete)
         res.status(204).send()
     }catch(err){
         res.status(500).json({err})
