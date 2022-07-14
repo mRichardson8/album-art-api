@@ -20,4 +20,15 @@ router.get('/search', async (req,res) => {
     }
 })
 
+router.post('/create', async (req,res) => {
+    try{
+        console.log(req.body)
+        let albumData = req.body.newAlbum
+        let result = await Album.createAlbum(albumData)
+        res.status(204).send()
+    }catch(err){
+        res.status(500).json({err})
+    }
+})
+
 module.exports = router

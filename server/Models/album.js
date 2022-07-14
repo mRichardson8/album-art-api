@@ -32,6 +32,17 @@ class Album {
             }
         });
     }
+
+    static createAlbum(data){
+        return new Promise(async (resolve, reject) => {
+            try{
+                const result = await db.query('INSERT INTO art (name, src, songs) VALUES ($1, $2, $3)', [data.name, data.src, data.songs])
+                resolve(result)
+            }catch(err){
+                reject('Failed to add new album')
+            }
+        });
+    }
 }
 
 module.exports = Album
