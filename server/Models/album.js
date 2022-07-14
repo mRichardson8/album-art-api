@@ -20,6 +20,18 @@ class Album {
             
         })
     }
+
+    static findBySongs(number){
+        return new Promise(async(resolve, reject) => {
+            try{
+                const data = await db.query('SELECT * FROM art WHERE songs > $1;', [number])
+                let albums = data.rows.map(album => new Album(album))
+                resolve(albums)
+            }catch(err){
+                reject(`Failed to search by song number of ${number}`)
+            }
+        });
+    }
 }
 
 module.exports = Album

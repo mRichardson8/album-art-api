@@ -4,9 +4,9 @@ const app = express();
 
 const albumRoutes = require('./Controllers/albums');
 
-app.use(express.json())
 app.use(cors())
-
+app.use(express.json())
+app.use(express.urlencoded({extended:false}))
 
 app.use('/albums', albumRoutes)
 
